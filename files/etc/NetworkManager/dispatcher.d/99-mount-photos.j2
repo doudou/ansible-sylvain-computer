@@ -1,0 +1,14 @@
+#! /bin/sh
+
+IFACE=$1
+ACTION=$2
+
+case $CONNECTION_ID in
+	WiDou*)
+		case ${ACTION} in
+			up)
+				mount -t cifs //192.168.0.10/photo /media/Diskstation/photos -o username=admin,password={{ smb_home_password }},rw,vers=2.0,uid={{ username }},gid={{ username }}
+				;;
+		esac
+		;;
+esac
