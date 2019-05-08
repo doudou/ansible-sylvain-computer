@@ -1,0 +1,36 @@
+- name: "Install the .vim configuration folder"
+  become: no
+  synchronize:
+      archive: no
+      recursive: yes
+      src: files/home/.vim/
+      dest: /home/{{ username }}/.vim/
+
+- name: "Copy the root .vimrc file"
+  copy:
+      src: files/home/.vimrc
+      dest: /home/{{ username }}/.vimrc
+      owner: "{{ username }}"
+      mode: 0644
+
+- name: "install Vundle"
+  command: "git clone https://github.com/gmarik/vundle.git /home/{{ username }}/.vim/bundle/vundle"
+  args:
+          creates: /home/{{ username }}/.vim/bundle/vundle
+
+- name: "Install the Vundle plugins"
+  command: vim +BundleInstall +qall
+
+- name: "Install the deb-based plugins"
+  become: yes
+  apt:
+          name: "{{ packages }}"
+  vars:
+          packages:
+                  - vim-latexsuite
+                  - vim-addon-manager
+                  - vim-scripts
+
+- name: "Enable the deb-based plugins"
+  command: "vim-addons install align latex-suite vcscommand surround matchit"
+

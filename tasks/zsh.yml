@@ -1,0 +1,29 @@
+- name: "Install the .zsh configuration folder"
+  synchronize:
+      archive: no
+      recursive: yes
+      src: files/home/.zsh/
+      dest: /home/{{ username }}/.zsh/
+
+- name: "Compile the zsh functions"
+  command: /home/{{ username }}/.zsh/compile
+  args:
+      chdir: /home/{{ username }}/.zsh
+
+- name: "Copy the root .zshrc file"
+  copy:
+      src: files/home/.zshrc
+      dest: /home/{{ username }}/.zshrc
+      owner: "{{ username }}"
+      mode: 0644
+
+- name: "Copy the root .zshenv file"
+  copy:
+      src: files/home/.zshenv
+      dest: /home/{{ username }}/.zshenv
+      owner: "{{ username }}"
+      mode: 0644
+
+- name: "Setup zsh as login shell"
+  become: yes
+  command: "chsh -s /bin/zsh {{ username }}"

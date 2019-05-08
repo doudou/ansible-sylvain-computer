@@ -1,0 +1,9 @@
+- name: "clone rbenv"
+  command: "git clone https://github.com/rbenv/rbenv /home/{{ username }}/.rbenv"
+  args:
+      creates: /home/{{ username }}/.rbenv
+
+- name: "clone ruby-build"
+  command: "git clone https://github.com/rbenv/ruby-build /home/{{ username }}/.rbenv/plugins/ruby-build"
+  args:
+      creates: /home/{{ username }}/.rbenv/plugins/ruby-build

@@ -1,0 +1,37 @@
+- name: "Ensure bcache is always properly setup"
+  copy:
+      src: files/etc/udev/rules.d/10-bcache.rules
+      dest: /etc/udev/rules.d/10-bcache.rules
+      owner: root
+      mode: 0644
+
+- name: "Create /media/Diskstation/photos"
+  file:
+      owner: root
+      mode: 0770
+      path: /media/Diskstation/photos
+      state: directory
+
+- name: "Setup auto-mounting Diskstation when at home"
+  template:
+      src: files/etc/NetworkManager/dispatcher.d/99-mount-photos.j2
+      dest: /etc/NetworkManager/dispatcher.d/99-mount-photos
+      owner: root
+      group: root
+      mode: 0700
+
+- name: "Setup auto-unmounting Diskstation when not at home"
+  copy:
+      src: files/etc/NetworkManager/dispatcher.d/pre-down.d/99-umount-photos
+      dest: /etc/NetworkManager/dispatcher.d/pre-down.d/99-umount-photos
+      owner: root
+      mode: 0700
+
+- name: "Copy our skypeforlinux wrapper to use echo cancellation in PulseAudio"
+  copy:
+      src: files/usr/local/bin/skypeforlinux
+      dest: /usr/local/bin/skypeforlinux
+      owner: root
+      mode: 0755
+
+
