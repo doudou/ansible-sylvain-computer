@@ -1,0 +1,20 @@
+function aenv() {
+    dir=$PWD
+    while test "x$dir" != "x/"; do
+        if test `basename $dir` != '.autoproj' && test -f $dir/env.sh; then
+            echo "sourcing $dir/env.sh"
+            source $dir/env.sh
+            break
+        fi
+        dir=`dirname $dir`
+    done
+    if test "x$dir" = "x/"; then
+        if test "x$AUTOPROJ_CURRENT_ROOT" = "x"; then
+            echo "found no env.sh file to load"
+        else
+            source $AUTOPROJ_CURRENT_ROOT/env.sh
+        fi
+    fi
+}
+
+
