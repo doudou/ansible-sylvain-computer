@@ -126,3 +126,18 @@ if [ -f $HOME/.zsh/prompt ]; then
   . $HOME/.zsh/prompt
 fi
 
+function dev() {
+    if test -d $HOME/dev/$1; then
+        cd $HOME/dev/$1
+        aenv
+    fi
+}
+function dev-source() {
+    env_sh=$HOME/dev/$1/env.sh
+    if test -f $env_sh; then
+        echo "sourcing $env_sh"
+        source $env_sh
+    fi
+}
+
+aenv

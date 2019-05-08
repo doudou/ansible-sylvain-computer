@@ -1,7 +1,7 @@
 function aenv() {
     dir=$PWD
     while test "x$dir" != "x/"; do
-        if test -f $dir/env.sh; then
+        if test `basename $dir` != '.autoproj' && test -f $dir/env.sh; then
             echo "sourcing $dir/env.sh"
             source $dir/env.sh
             break
@@ -9,7 +9,11 @@ function aenv() {
         dir=`dirname $dir`
     done
     if test "x$dir" = "x/"; then
-        echo "found no env.sh file to load"
+        if test "x$AUTOPROJ_CURRENT_ROOT" = "x"; then
+            echo "found no env.sh file to load"
+        else
+            source $AUTOPROJ_CURRENT_ROOT/env.sh
+        fi
     fi
 }
 
