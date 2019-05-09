@@ -1,0 +1,7 @@
+- name: "Install VSCode extensions"
+  command: "code --install-extension {{ item }}"
+  with_items:
+      - castwide.solargraph
+      - vscodevim.vim
+      - rock-robotics.rock
+      - eamodio.gitlens

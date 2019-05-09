@@ -18,6 +18,9 @@
       - import_tasks: tasks/rbenv.yml
         become: no
         tags: [home, rbenv]
+      - import_tasks: tasks/vscode.yml
+        become: no
+        tags: [home, vscode]
       - name: "copy .autoprojrc"
         become: no
         tags: home
