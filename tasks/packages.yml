@@ -27,9 +27,11 @@
       packages:
           - darktable
           - digikam
+          - gimp
+          - inkscape
           - kdenlive
-          - vim
           - spotify-client
+          - vim
           - zsh
 
 
