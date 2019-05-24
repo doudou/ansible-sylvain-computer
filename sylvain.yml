@@ -9,6 +9,9 @@
       - import_tasks: tasks/packages.yml
         become: yes
         tags: [system, packages]
+      - import_tasks: tasks/mime.yml
+        become: yes
+        tags: [system, mime]
       - import_tasks: tasks/vim.yml
         become: no
         tags: [home, vim]

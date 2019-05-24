@@ -1,0 +1,45 @@
+- name: "Create the mime/packages directory"
+  file:
+      path: /usr/local/share/mime/packages
+      state: directory
+
+- name: "Install the LUKS mimetype"
+  copy:
+      src: files/usr/local/share/mime/packages/application-x-luks.xml
+      dest: /usr/local/share/mime/packages/application-x-luks.xml
+      owner: root
+      group: root
+      mode: 0644
+
+- name: "Create the kservices5 directory"
+  file:
+      path: /usr/local/share/kservices5
+      state: directory
+
+- name: "Install the LUKS actions for Plasma"
+  copy:
+      src: files/usr/local/share/kservices5/luks.desktop
+      dest: /usr/local/share/kservices5/luks.desktop
+      owner: root
+      group: root
+      mode: 0644
+
+- name: "Install the helper script for opening LUKS-encrypted loopback files"
+  copy:
+      src: files/usr/local/bin/kde-cryptsetup-open
+      dest: /usr/local/bin/kde-cryptsetup-open
+      owner: root
+      group: root
+      mode: 0755
+
+- name: "Install the helper script for closing LUKS-encrypted loopback files"
+  copy:
+      src: files/usr/local/bin/kde-cryptsetup-close
+      dest: /usr/local/bin/kde-cryptsetup-close
+      owner: root
+      group: root
+      mode: 0755
+
+- name: "Update the MIME database"
+  command: update-mime-database /usr/local/share/mime
+

@@ -1,0 +1,19 @@
+[Desktop Entry]
+Type=Service
+Encoding=UTF-8
+# all files inherit from application/octet-stream
+MimeType=application/x-luks;
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+Name=LUKS Loopback
+Actions=luks_open;luks_close
+
+[Desktop Action luks_open]
+Name=Open Encrypted Loopback
+Icon=kleopatra
+Exec=/usr/local/bin/kde-cryptsetup-open %f
+
+[Desktop Action luks_close]
+Name=Close Encrypted Loopback
+Icon=kleopatra
+Exec=/usr/local/bin/kde-cryptsetup-close %f
+

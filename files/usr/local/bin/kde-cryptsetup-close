@@ -1,0 +1,5 @@
+#! /bin/sh -e
+
+name=$(basename "$1")
+pkexec /sbin/cryptsetup close "$name"
+
