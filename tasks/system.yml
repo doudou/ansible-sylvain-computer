@@ -5,6 +5,16 @@
       owner: root
       mode: 0644
 
+- name: "Fix bcache-not-recognized-by-luks problem at boot"
+  copy:
+      src: files/etc/initramfs-tools/scripts/init-top/udev-late
+      dest: /etc/initramfs-tools/scripts/init-top/udev-late
+      owner: root
+      mode: 0644
+
+- name: "Update existing initramfs to integrate the bcache fix"
+  command: "update-initramfs -u -k all"
+
 - name: "Create /media/Diskstation/photos"
   file:
       owner: root

@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+PREREQS="udev"
+
+prereqs() { echo "$PREREQS"; }
+
+case "$1" in
+    prereqs)
+    prereqs
+    exit 0
+    ;;
+esac
+
+sleep 2
+udevadm trigger
