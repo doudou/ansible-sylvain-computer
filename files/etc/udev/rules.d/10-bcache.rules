@@ -1,1 +1,1 @@
-KERNEL=="bcache0", ATTR{bcache/cache_mode}="writethrough", ATTR{bcache/sequential_cutoff}="1024M"
+KERNEL=="bcache0", ATTR{bcache/cache_mode}="writeback", ATTR{bcache/sequential_cutoff}="0"
