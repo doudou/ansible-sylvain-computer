@@ -30,13 +30,6 @@
       group: root
       mode: 0700
 
-- name: "Setup auto-unmounting Diskstation when not at home"
-  copy:
-      src: files/etc/NetworkManager/dispatcher.d/pre-down.d/99-umount-photos
-      dest: /etc/NetworkManager/dispatcher.d/pre-down.d/99-umount-photos
-      owner: root
-      mode: 0700
-
 - name: "Copy our skypeforlinux wrapper to use echo cancellation in PulseAudio"
   copy:
       src: files/usr/local/bin/skypeforlinux

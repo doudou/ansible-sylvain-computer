@@ -9,6 +9,9 @@ case $CONNECTION_ID in
 			up)
 				mount -t cifs //192.168.0.10/photo /media/Diskstation/photos -o username=admin,password={{ smb_home_password }},rw,vers=2.0,uid={{ username }},gid={{ username }}
 				;;
+                        down)
+				umount --lazy /media/Diskstation/photos
+				;;
 		esac
 		;;
 esac
