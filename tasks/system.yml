@@ -1,4 +1,5 @@
 - name: "Ensure bcache is always properly setup"
+  tags: bcache
   copy:
       src: files/etc/udev/rules.d/10-bcache.rules
       dest: /etc/udev/rules.d/10-bcache.rules
@@ -6,13 +7,31 @@
       mode: 0644
 
 - name: "Fix bcache-not-recognized-by-luks problem at boot"
+  tags: bcache
   copy:
       src: files/etc/initramfs-tools/scripts/init-top/udev-late
       dest: /etc/initramfs-tools/scripts/init-top/udev-late
       owner: root
+      mode: 0755
+
+- name: copy the bcache-sleep service, that disables bcache on sleep
+  tags: bcache
+  copy:
+      src: files/lib/systemd/system/bcache-sleep.service
+      dest: /lib/systemd/system/bcache-sleep.service
+      owner: root
+      group: root
       mode: 0644
 
+- name: enable the bcache-sleep service to disable bcache on sleep
+  tags: bcache
+  systemd:
+      name: bcache-sleep
+      daemon_reload: true
+      enabled: true
+
 - name: "Update existing initramfs to integrate the bcache fix"
+  tags: bcache
   command: "update-initramfs -u -k all"
 
 - name: "Create /media/Diskstation/photos"

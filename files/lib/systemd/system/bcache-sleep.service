@@ -1,0 +1,14 @@
+[Unit]
+Description=Bcache mode handling on suspend/resume
+Before=sleep.service hibernate.service
+StopWhenUnneeded=yes
+Documentation=
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=sh -c "echo none > /sys/block/bcache0/bcache/cache_mode"
+ExecStop=sh -c "echo writeback > /sys/block/bcache0/bcache/cache_mode"
+
+[Install]
+WantedBy=sleep.target hibernate.target
