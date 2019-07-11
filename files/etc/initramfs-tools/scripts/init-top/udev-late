@@ -11,5 +11,11 @@ case "$1" in
     ;;
 esac
 
-sleep 2
+test -f files/etc/initramfs-tools/scripts/init-top/udev-late
+echo $?
+
 udevadm trigger
+while ! test -f /dev/bcache0; do
+    sleep 1
+    udevadm trigger
+done
