@@ -1,5 +1,5 @@
 ~~~
-ansible-playbook -K -i localhost, -c local -e username=doudou sylvain.yml
+ansible-playbook -K -i localhost, -c local -e username=doudou sylvain.yml --ask-vault
 ~~~
 
 What to do afterwards:
